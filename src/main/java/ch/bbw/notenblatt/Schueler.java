@@ -5,6 +5,8 @@
  */
 package ch.bbw.notenblatt;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author 5im15jakaur
@@ -23,6 +25,9 @@ public class Schueler extends Person {
     private String zeichnen;
     private String musik;
 
+    private int anzahlTiefpunkte;
+    private double durchschnitt;
+
     public Schueler(int id, String vorname, String name, String deutsch, String franzoesisch, String englisch, String mathematik, String physik, String geografie, String geschichte, String chemie, String sport, String zeichnen, String musik) {
         super(id, vorname, name);
         this.deutsch = deutsch;
@@ -36,6 +41,22 @@ public class Schueler extends Person {
         this.sport = sport;
         this.zeichnen = zeichnen;
         this.musik = musik;
+    }
+
+    public Schueler(int id, String vorname, String name, String deutsch, String franzoesisch, String englisch, String mathematik, String physik, String geografie, String geschichte, String chemie, String sport, String zeichnen, String musik, double durchschnitt) {
+        super(id, vorname, name);
+        this.deutsch = deutsch;
+        this.franzoesisch = franzoesisch;
+        this.englisch = englisch;
+        this.mathematik = mathematik;
+        this.physik = physik;
+        this.geografie = geografie;
+        this.geschichte = geschichte;
+        this.chemie = chemie;
+        this.sport = sport;
+        this.zeichnen = zeichnen;
+        this.musik = musik;
+        this.durchschnitt = durchschnitt;
     }
 
     public String getDeutsch() {
@@ -125,9 +146,56 @@ public class Schueler extends Person {
     public void setMusik(String musik) {
         this.musik = musik;
     }
-    
-    public void getDurchschnitt(){
-      //  Integer.parseInt(deutsch)
+
+    public void setDurchschnitt(double durchschnitt) {
+        this.durchschnitt = durchschnitt;
+    }
+
+    public double getDurchschnitt() {
+        return durchschnitt;
+    }
+
+    public String getSchuelerDurchschnitt() {
+        DecimalFormat f = new DecimalFormat("#0.00");
+        durchschnitt = (Double.parseDouble(deutsch) + Double.parseDouble(franzoesisch)
+                + Double.parseDouble(englisch) + Double.parseDouble(mathematik) + Double.parseDouble(physik)
+                + Double.parseDouble(geografie) + Double.parseDouble(geschichte)
+                + Double.parseDouble(chemie) + Double.parseDouble(sport)) / 9;
+        String x = f.format(durchschnitt);
+        return x;
+    }
+
+    public int getAnzahlTiefpunkte() {
+        return anzahlTiefpunkte;
+    }
+
+    public int anzahlTiefpunkte() {
+        if (Integer.parseInt(deutsch) > 4) {
+            anzahlTiefpunkte += anzahlTiefpunkte + 1;
+        }
+        if (Integer.parseInt(franzoesisch) > 4) {
+            anzahlTiefpunkte += anzahlTiefpunkte + 1;
+        }
+        if (Integer.parseInt(englisch) > 4) {
+            anzahlTiefpunkte += anzahlTiefpunkte + 1;
+        }
+        if (Integer.parseInt(chemie) > 4) {
+            anzahlTiefpunkte += anzahlTiefpunkte + 1;
+        }
+        if (Integer.parseInt(geografie) > 4) {
+            anzahlTiefpunkte += anzahlTiefpunkte + 1;
+        }
+        if (Integer.parseInt(geschichte) > 4) {
+            anzahlTiefpunkte += anzahlTiefpunkte + 1;
+        }
+        if (Integer.parseInt(mathematik) > 4) {
+            anzahlTiefpunkte += anzahlTiefpunkte + 1;
+        }
+        if (Integer.parseInt(sport) > 4) {
+            anzahlTiefpunkte += anzahlTiefpunkte + 1;
+        }
+
+        return getAnzahlTiefpunkte();
     }
 
 }

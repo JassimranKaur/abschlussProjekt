@@ -20,6 +20,7 @@ public class Verarbeitung {
 
     private String fileSchueler;
     private String fileLehrer;
+    private int anzahlTiefpunkte;
     private ArrayList<Schueler> schuelerListe;
     private ArrayList<Lehrer> lehrerListe;
 
@@ -28,6 +29,7 @@ public class Verarbeitung {
         fileLehrer = "LehrpersonenB.csv";
         schuelerListe = new ArrayList<>();
         lehrerListe = new ArrayList<>();
+        anzahlTiefpunkte = 0;
     }
 
     public void fileEinlesenSchueler() throws FileNotFoundException, IOException {
@@ -63,8 +65,10 @@ public class Verarbeitung {
 
     public void fileAusgebenSchueler() {
         for (Schueler schueler : schuelerListe) {
+
             System.out.println(schueler.getPersonenNummer() + " " + schueler.getVorname() + "\t" + schueler.getDeutsch() + "\t" + schueler.getFranzoesisch() + "\t" + schueler.getEnglisch() + "\t" + schueler.getPhysik()
-                    + "\t" + schueler.getGeografie() + "\t" + schueler.getGeschichte() + "\t" + schueler.getChemie() + "\t" + schueler.getSport() + "\t" + schueler.getZeichnen() + "\t" + schueler.getMusik());
+                    + "\t" + schueler.getGeografie() + "\t" + schueler.getGeschichte() + "\t" + schueler.getChemie() + "\t" + schueler.getSport() + "\t" + schueler.getZeichnen() + "\t" + schueler.getMusik() + "\t" + schueler.getSchuelerDurchschnitt()
+                    + "\t" + schueler.getAnzahlTiefpunkte());
         }
     }
 
@@ -73,13 +77,34 @@ public class Verarbeitung {
         for (Lehrer lehrer : lehrerListe) {
             System.out.print(lehrer.getKuerzel() + "\t");
         }
+        System.out.println("Durschnitt");
         System.out.println("");
     }
 
-    public void durchschnittSchueler() {
-
-    }
-
+    /*public int anzahlTiefpunkte() {
+        for (Schueler schueler : schuelerListe) {
+            if(Integer.parseInt(schueler.getDeutsch()) > 4 ){
+                anzahlTiefpunkte = anzahlTiefpunkte + 1;
+            }if(Integer.parseInt(schueler.getFranzoesisch()) > 4 ){
+                anzahlTiefpunkte = anzahlTiefpunkte + 1;
+            }if(Integer.parseInt(schueler.getEnglisch()) > 4 ){
+                anzahlTiefpunkte = anzahlTiefpunkte + 1;
+            }if(Integer.parseInt(schueler.getChemie()) > 4 ){
+                anzahlTiefpunkte = anzahlTiefpunkte + 1;
+            }if(Integer.parseInt(schueler.getGeografie()) > 4 ){
+                anzahlTiefpunkte = anzahlTiefpunkte + 1;
+            }if(Integer.parseInt(schueler.getGeschichte()) > 4 ){
+                anzahlTiefpunkte = anzahlTiefpunkte + 1;
+            }if(Integer.parseInt(schueler.getMathematik()) > 4 ){
+                anzahlTiefpunkte = anzahlTiefpunkte + 1;
+            }if(Integer.parseInt(schueler.getSport()) > 4 ){
+                anzahlTiefpunkte = anzahlTiefpunkte + 1;
+            }
+        }
+        return anzahlTiefpunkte;
+    }*/
+    
+    
     public static void main(String[] args) throws IOException {
         Verarbeitung v = new Verarbeitung();
         v.fileEinlesenSchueler();
