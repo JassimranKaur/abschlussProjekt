@@ -11,16 +11,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author 5im15jakaur
+ * @author 5im15jakaur & Teodora Filipovic
  */
 public class Verarbeitung {
 
     private String fileSchueler;
     private String fileLehrer;
-    private int anzahlTiefpunkte;
     private ArrayList<Schueler> schuelerListe;
     private ArrayList<Lehrer> lehrerListe;
 
@@ -29,10 +30,10 @@ public class Verarbeitung {
         fileLehrer = "LehrpersonenB.csv";
         schuelerListe = new ArrayList<>();
         lehrerListe = new ArrayList<>();
-        anzahlTiefpunkte = 0;
     }
 
-    public void fileEinlesenSchueler() throws FileNotFoundException, IOException {
+    //Die Notenliste wird eingelesen
+    public void fileEinlesenSchueler() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileSchueler));
         br.readLine();
         String line = null;
@@ -48,6 +49,7 @@ public class Verarbeitung {
         br.close();
     }
 
+    //die Lehrerliste wird eingelesen
     public void fileEinlesenLehrer() throws FileNotFoundException, IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileLehrer));
         br.readLine();
@@ -63,13 +65,14 @@ public class Verarbeitung {
         br.close();
     }
 
-    public void fileAusgebenSchueler() {
+    public void fileAusgebenSchueler() throws EigeneException {
         for (Schueler schueler : schuelerListe) {
 
             System.out.println(schueler.getPersonenNummer() + " " + schueler.getVorname() + "\t" + schueler.getDeutsch() + "\t" + schueler.getFranzoesisch() + "\t" + schueler.getEnglisch() + "\t" + schueler.getPhysik()
                     + "\t" + schueler.getGeografie() + "\t" + schueler.getGeschichte() + "\t" + schueler.getChemie() + "\t" + schueler.getSport() + "\t" + schueler.getZeichnen() + "\t" + schueler.getMusik() + "\t" + schueler.getSchuelerDurchschnitt()
-                    + "\t" + schueler.getAnzahlTiefpunkte());
+                    + "\t" + "\t" + schueler.summeTiefpunkte() + "\t" + "\t" + "\t" + schueler.anzahlTiefpunkte() + "\t"+ "\t"+ "\t" + schueler.promoviertOderNicht());
         }
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
     public void fileAusgebenLehrer() {
@@ -77,39 +80,16 @@ public class Verarbeitung {
         for (Lehrer lehrer : lehrerListe) {
             System.out.print(lehrer.getKuerzel() + "\t");
         }
-        System.out.println("Durschnitt");
+        System.out.print("Durschnitt" + "\t" + "Summe Tiefpunkte" + "\t" + "Anzahl Tiefnoten" + "\t" + "Promotionsentscheid");
         System.out.println("");
     }
 
-    /*public int anzahlTiefpunkte() {
-        for (Schueler schueler : schuelerListe) {
-            if(Integer.parseInt(schueler.getDeutsch()) > 4 ){
-                anzahlTiefpunkte = anzahlTiefpunkte + 1;
-            }if(Integer.parseInt(schueler.getFranzoesisch()) > 4 ){
-                anzahlTiefpunkte = anzahlTiefpunkte + 1;
-            }if(Integer.parseInt(schueler.getEnglisch()) > 4 ){
-                anzahlTiefpunkte = anzahlTiefpunkte + 1;
-            }if(Integer.parseInt(schueler.getChemie()) > 4 ){
-                anzahlTiefpunkte = anzahlTiefpunkte + 1;
-            }if(Integer.parseInt(schueler.getGeografie()) > 4 ){
-                anzahlTiefpunkte = anzahlTiefpunkte + 1;
-            }if(Integer.parseInt(schueler.getGeschichte()) > 4 ){
-                anzahlTiefpunkte = anzahlTiefpunkte + 1;
-            }if(Integer.parseInt(schueler.getMathematik()) > 4 ){
-                anzahlTiefpunkte = anzahlTiefpunkte + 1;
-            }if(Integer.parseInt(schueler.getSport()) > 4 ){
-                anzahlTiefpunkte = anzahlTiefpunkte + 1;
-            }
-        }
-        return anzahlTiefpunkte;
-    }*/
-    
-    
-    public static void main(String[] args) throws IOException {
-        Verarbeitung v = new Verarbeitung();
-        v.fileEinlesenSchueler();
-        v.fileEinlesenLehrer();
-        v.fileAusgebenLehrer();
-        v.fileAusgebenSchueler();
+    public static void main(String[] args) throws IOException, EigeneException  {
+            Verarbeitung v = new Verarbeitung();
+            v.fileEinlesenSchueler();
+            v.fileEinlesenLehrer();
+            v.fileAusgebenLehrer();
+            v.fileAusgebenSchueler();
+        } 
     }
-}
+

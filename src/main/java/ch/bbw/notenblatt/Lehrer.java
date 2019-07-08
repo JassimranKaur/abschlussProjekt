@@ -7,7 +7,7 @@ package ch.bbw.notenblatt;
 
 /**
  *
- * @author 5im15jakaur
+ * @author Teodora Filipovic
  */
 public class Lehrer extends Person {
 
